@@ -130,7 +130,7 @@ class Main extends React.Component {
                     {noData}
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            <h3 className="panel-title">Hi Julie</h3>
+                            <h3 className="panel-title">Current Status</h3>
                         </div>
                         <div className="panel-body">
                             <div className="text-left col-sm-12">Current Reading: {glucose}</div>
