@@ -77,7 +77,18 @@ class Main extends React.Component {
         var lastReading = 'Not Available';
         if (this.state.lastEntry) {
             var last = new Date(this.state.lastEntry);
-            lastReading = last.getHours() + ':';
+            var ampm = 'AM';
+            if (last.getHours() == 0) {
+                lastReading = '12:';
+            } else if (last.getHours() == 12) {
+                lastReading = '12:';
+                ampm = 'PM'
+            } else if (last.getHours() > 12) {
+                lastReading = last.getHours() - 12 + ':';
+                ampm = 'PM';
+            } else {
+                lastReading = last.getHours() + ':';
+            }
             if (last.getMinutes() < 10) {
                 lastReading += '0' + last.getMinutes();
             } else {
@@ -88,6 +99,7 @@ class Main extends React.Component {
             } else {
                 lastReading += ':' + last.getSeconds();
             }
+            lastReading += ' ' + ampm;
         }
         var nextCall = 'Not Available';
         if (this.state.next) {
