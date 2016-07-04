@@ -69,7 +69,11 @@ class Main extends React.Component {
     render() {
         var glucose = 'Not available';
         if (this.state.glucose) {
-            glucose = this.state.glucose;
+            if (this.state.glucose == 401) {
+                glucose = 'HIGH';
+            } else {
+                glucose = this.state.glucose;
+            }
         }
         var currentTrend = 'Not available';
         if (this.state.trend) {
