@@ -11,13 +11,14 @@ import _ from 'lodash';
 class Main extends React.Component {
     constructor(props) {
         super(props);
+        this.onChange = this.onChange.bind(this);
+        this.decrementTime = this.decrementTime.bind(this);
+        this.calcTime = this.calcTime.bind(this);
         this.state = {};
     }
 
     componentDidMount() {
-        glucoseStore.listen(this.onChange.bind(this));
-        this.decrementTime = this.decrementTime.bind(this);
-        this.calcTime = this.calcTime.bind(this);
+        glucoseStore.listen(this.onChange);
         var gState = glucoseStore.getState();
         if (gState.lastEntry) {
             gState.next = this.calcTime(gState.lastEntry);
