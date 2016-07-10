@@ -15,6 +15,9 @@ p {
     margin: 30px 0;
 }
 
+button{
+    margin: 13px 12px 12px 10px;
+}
 p a {
     text-decoration: underline;
 }

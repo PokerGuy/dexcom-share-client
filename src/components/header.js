@@ -1,5 +1,7 @@
 import React                    from 'react';
 import {RouteHandler, Link} from 'react-router';
+import adminAction from '../actions/adminAction';
+import adminStore from '../stores/adminStore';
 import '../styles/bootstrap.css';
 import '../styles/clean-blog.css';
 import Bootstrap from '../lib/bootstrap';
@@ -9,23 +11,33 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.changeState = this.changeState.bind(this);
-        this.state = {};
+        this.onChange = this.onChange.bind(this);
+        this.logOut = this.logOut.bind(this);
+        this.state = {token: null};
     }
 
     componentDidMount() {
-
+        adminStore.listen(this.onChange);
+        this.setState(adminStore.getState());
     }
 
-    changeState(state) {
-
+    componentWillUnmount() {
+        adminStore.unlisten(this.onChange);
     }
 
     onChange(event) {
-        this.changeState(event);
+        this.setState(adminStore.getState());
+    }
+
+    logOut() {
+        adminAction.logout(this.state.token);
     }
 
     render() {
+        var login = <li><Link to="/login">Log In</Link></li>;
+        if (this.state.token) {
+            login = <li><a href="#" onClick={this.logOut}>Log Out</a></li>;
+        }
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
@@ -41,8 +53,9 @@ class Header extends React.Component {
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
+                            {login}
                             <li>
-                                <Link to="about">About</Link>
+                                <Link to="/about">About</Link>
                             </li>
                         </ul>
                     </div>
