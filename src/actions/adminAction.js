@@ -5,7 +5,6 @@ import request from 'superagent';
 import constants from '../constants/constants';
 
 class adminAction {
-
     login(password) {
         var self = this;
         request
