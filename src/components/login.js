@@ -27,8 +27,6 @@ class Main extends React.Component {
         var t = adminStore.getState();
         if (t.token) {
             this.props.history.push('/');
-        } else {
-            this.setState({error: "Incorrect password."})
         }
     }
 
@@ -38,37 +36,32 @@ class Main extends React.Component {
     }
 
     render() {
-        var error = <div></div>;
-        if (this.state.error) {
-            error = <div className="alert alert-danger">{this.state.error}</div>;
-        }
         return (
-        <div className="offset-top">
-            {error}
-            <div className="col-sm-12">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">Admin Login</h3>
-                    </div>
-                    <div className="panel-body">
-                        <div className="text-left col-sm-12">
-                            <form>
-                                <fieldset className="form-group">
-                                    <label htmlFor="password">Admin Password:</label>
-                                    <input type="password" className="form-control" ref="password"/>
-                                </fieldset>
-                                <button className="btn btn-success" onClick={this.login}>Submit</button>
-                                <Link to="/">
-                                    <button className="btn btn-danger">Cancel</button>
-                                </Link>
-                            </form>
+            <div className="offset-top">
+                <div className="col-sm-12">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <h3 className="panel-title">Admin Login</h3>
+                        </div>
+                        <div className="panel-body">
+                            <div className="text-left col-sm-12">
+                                <form>
+                                    <fieldset className="form-group">
+                                        <label htmlFor="password">Admin Password:</label>
+                                        <input type="password" className="form-control" ref="password"/>
+                                    </fieldset>
+                                    <button className="btn btn-success" onClick={this.login}>Submit</button>
+                                    <Link to="/">
+                                        <button className="btn btn-danger">Cancel</button>
+                                    </Link>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="offset-bottom">&nbsp;</div>
             </div>
-            <div className="offset-bottom">&nbsp;</div>
-        </div>
-    )
+        )
     }
 }
 

@@ -16,7 +16,7 @@ class adminAction {
                     self.actions.loggedIn(res.body.token);
                 } else {
                     console.log(err);
-                    self.actions.loggedOut();
+                    self.actions.unsuccessfulLogin();
                 }
             });
     }
@@ -40,6 +40,10 @@ class adminAction {
     }
 
     loggedOut() {
+        this.dispatch();
+    }
+
+    unsuccessfulLogin() {
         this.dispatch();
     }
 }
