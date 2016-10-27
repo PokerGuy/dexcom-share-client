@@ -21,13 +21,29 @@ class GlucoseActions {
 
     initialized(res) {
         res.status = 'CONNECTED';
+        var history = res.glucose;
+        if (history) {
+            history = _.sortBy(history, 'time').reverse().filter(function(g) {
+                var unixTime = new Date(g.time).getTime();
+                if (unixTime > (Date.now() - (1000 * 60 * 60 * 3))) {
+                    return g;
+                }
+            });
+            res.glucose = history[0].glucose;
+            res.history = history;
+        }
         this.dispatch(res);
-    }
+        //console.log(new Date(res.lastEntry).getTime());
+}
 
     update(newState) {
+        //newState has a new thing to add to history - no longer represents the new state...
         this.dispatch(newState);
     }
 
+    catchUp(last) {
+        //do something
+    }
 }
 
 export default alt.createActions(GlucoseActions);

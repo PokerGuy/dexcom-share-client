@@ -43,8 +43,24 @@ class GlucoseStore {
     }
 
     update(state) {
-        state.data = true;
-        this.setState(state);
+        var currState = this.state;
+        currState.data = true;
+        if (currState.history) {
+            var history = currState.history;
+            history = _.sortBy(history, 'time').reverse().map(function(g) {
+                var unixTime = new Date(g.time).getTime();
+                if (unixTime > (Date.now() - (1000 * 60 * 60 * 3))) {
+                    return g;
+                }
+            });
+            currState.glucose = state.glucose;
+            history.unshift({time: state.lastEntry, glucose: state.glucose});
+            currState.history = history;
+            currState.lastEntry = state.lastEntry;
+            currState.next = state.next;
+            currState.trend = state.trend;
+        }
+        this.setState(currState);
     }
 
     disconnected() {

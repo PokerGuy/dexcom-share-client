@@ -58,6 +58,9 @@ module.exports = {
         }, {
             test: /\.(png|jpg|eot|ttf|svg|woff|woff2)$/,
             loader: 'url-loader?limit=8192'
+        }, {
+            include: /\.json$/,
+            loader: 'json-loader'
         }]
     },
 
@@ -68,11 +71,6 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
         })
     ]
 

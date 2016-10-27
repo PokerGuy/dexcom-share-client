@@ -7,26 +7,29 @@ import glucoseActions from '../actions/glucoseAction';
 import glucoseStore from '../stores/glucoseStore';
 import trend from './trend';
 import _ from 'lodash';
+import moment from 'moment-timezone';
+import GlucoseChart from './glucoseChart';
+import NextReading from './timer';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.decrementTime = this.decrementTime.bind(this);
-        this.calcTime = this.calcTime.bind(this);
         this.state = {};
     }
 
     componentDidMount() {
         glucoseStore.listen(this.onChange);
         var gState = glucoseStore.getState();
-        if (gState.lastEntry) {
-            gState.next = this.calcTime(gState.lastEntry);
-            gState.timer = true;
-            window.timer = setInterval(this.decrementTime, 1000);
-        } else {
-            gState.timer = false;
+        var history = gState.glucose;
+        if (history) {
+            if (history.length > 0) {
+                history = _.sortBy(history, 'time').reverse();
+                gState.glucose = history[0].glucose;
+                gState.history = history;
+            }
         }
+
         this.setState(gState);
     }
 
@@ -35,40 +38,14 @@ class Main extends React.Component {
         glucoseStore.unlisten(this.onChange);
     }
 
-    calcTime(lastEntry) {
-        var now = new Date().getTime();
-        var last = new Date(lastEntry).getTime();
-        var next = last + (60 * 1000 * 6); // 60 seconds, 1000 milliseconds per seconds, and anticipating in 6 minutes after the last call
-        var until = next - now;
-        if (until < 0) {
-            until = 30 * 1000;
-        }
-        return until;
-    }
-
     onChange(event) {
         var newState = glucoseStore.getState();
-        newState.timer = this.state.timer;
-        newState.next = this.calcTime(newState.lastEntry);
-        if (newState.status == 'DISCONNECTED' && this.state.timer == true) {
-            clearInterval(window.timer);
-            newState.timer = false;
-        }
-        if (newState.status == 'CONNECTED' && this.state.timer == false) {
-            newState.timer = true;
-            window.timer = setInterval(this.decrementTime, 1000);
-        }
         this.setState(newState);
-    }
-
-    decrementTime() {
-        var state = this.state;
-        state.next = state.next - 1000;
-        this.setState(state);
     }
 
     render() {
         var glucose = 'Not available';
+        var sorted;
         if (this.state.glucose) {
             if (this.state.glucose == 401) {
                 glucose = 'HIGH';
@@ -107,43 +84,23 @@ class Main extends React.Component {
             }
             lastReading += ' ' + ampm;
         }
-        var nextCall = 'Not Available';
-        if (this.state.next) {
-            var trunc = (this.state.next / 1000).toString().split(".");
-            var seconds = parseInt(trunc[0]);
-            var minutes = (seconds / 60).toString().split(".");
-            var strMinutes = parseInt(minutes[0]);
-            var strSeconds = seconds % 60;
-            if (strSeconds < 10) {
-                strSeconds = '0' + strSeconds;
-            }
-            nextCall = strMinutes + ':' + strSeconds;
-            if (this.state.next < 0) {
-                nextCall = 'Any second now...';
-            }
-        }
-        if (this.state.status == 'DISCONNECTED') {
-            nextCall = 'Disconnected';
-        }
+
         var noData = <div></div>;
         if (this.state.data != true) {
             noData = <div className="alert alert-danger">Not getting any data from Dexcom</div>;
         }
+
         return (
             <div className="offset-top">
                 <div className="col-sm-12">
                     {noData}
-                    <div className="panel panel-default">
-                        <div className="panel-heading">
-                            <h3 className="panel-title">Current Status</h3>
-                        </div>
                         <div className="panel-body">
                             <div className="text-left col-sm-12">Current Reading: {glucose}</div>
                             <div className="text-left col-sm-12">Direction: {currentTrend}</div>
                             <div className="text-left col-sm-12">Last Reading: {lastReading}</div>
-                            <div className="text-left col-sm-12">Next Reading: {nextCall}</div>
+                            <div className="text-left col-sm-12"><NextReading status={this.state.status} lastEntry={this.state.lastEntry}/></div>
+                            <GlucoseChart history={this.state.history} />
                         </div>
-                    </div>
                 </div>
                 <div className="offset-bottom">&nbsp;</div>
             </div>
