@@ -60,7 +60,9 @@ export default class GlucoseChart extends Component {
 		}
                 if (ticks === 1) {
                     comptime = utcTime;
-                    historicalData.push(this.state.history[x].glucose);
+		    if (this.state.history[x]) {	
+                    	historicalData.push(this.state.history[x].glucose);
+		    }
                     this.formatTime(6, utcTime, function(ft) {
                         labels.push(ft);
                     });
@@ -68,7 +70,9 @@ export default class GlucoseChart extends Component {
                     this.formatTime(ticks, utcTime, function(ft) {
                         labels.push(ft);
                     });
-                    historicalData.push(this.state.history[x].glucose);
+		    if (this.state.history[x]) {
+                    	historicalData.push(this.state.history[x].glucose);
+		    }
                     comptime = utcTime;
                 } else {
                     while (utcTime > (comptime + 5.5*60*1000)) {
@@ -83,7 +87,9 @@ export default class GlucoseChart extends Component {
                     this.formatTime(ticks, utcTime, function(ft) {
                         labels.push(ft);
                     });
-                    historicalData.push(this.state.history[x].glucose);
+		    if (this.state.history[x]) {	
+                    	historicalData.push(this.state.history[x].glucose);
+		    }	
                 }
             }
             var data = {
