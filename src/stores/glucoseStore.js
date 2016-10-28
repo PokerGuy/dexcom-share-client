@@ -84,4 +84,4 @@ class GlucoseStore {
     }
 }
 
-export default alt.createStore(ImmutableStore(GlucoseStore));
+export default alt.createStore(ImmutableStore(GlucoseStore), 'GlucoseStore');

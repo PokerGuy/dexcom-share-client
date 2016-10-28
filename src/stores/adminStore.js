@@ -28,4 +28,4 @@ class AdminStore {
     }
 }
 
-export default alt.createStore(ImmutableStore(AdminStore));
+export default alt.createStore(ImmutableStore(AdminStore), 'AdminStore');
