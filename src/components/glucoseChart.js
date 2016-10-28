@@ -55,7 +55,7 @@ export default class GlucoseChart extends Component {
             for (var x=this.state.history.length - 1; x >= 0; x--) {
                 ticks++;
                 var utcTime = 1;
-		if (this.state.history[x].time) {
+		if (this.state.history[x]) {
 			utcTime = new Date(this.state.history[x].time).getTime();
 		}
                 if (ticks === 1) {
