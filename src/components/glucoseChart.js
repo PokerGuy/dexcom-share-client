@@ -51,46 +51,41 @@ export default class GlucoseChart extends Component {
             var historicalData = [];
             var labels = [];
 
-
-            for (var x=this.state.history.length - 1; x >= 0; x--) {
+            for (var x = this.state.history.length - 1; x >= 0; x--) {
                 ticks++;
-                var utcTime = 1;
-		if (this.state.history[x]) {
-			utcTime = new Date(this.state.history[x].time).getTime();
-		}
+                var utcTime = new Date(this.state.history[x].time).getTime();
                 if (ticks === 1) {
                     comptime = utcTime;
-		    if (this.state.history[x]) {	
-                    	historicalData.push(this.state.history[x].glucose);
-		    }
-                    this.formatTime(6, utcTime, function(ft) {
+                    historicalData.push(this.state.history[x].glucose);
+                    this.formatTime(6, utcTime, function (ft) {
                         labels.push(ft);
                     });
-                } else if (((comptime + 4*60*1000) < utcTime) && (utcTime < (comptime + 6*60*1000))) {
-                    this.formatTime(ticks, utcTime, function(ft) {
+                } else if (((comptime + 4 * 60 * 1000) < utcTime) && (utcTime < (comptime + 6 * 60 * 1000))) {
+                    this.formatTime(ticks, utcTime, function (ft) {
                         labels.push(ft);
                     });
-		    if (this.state.history[x]) {
-                    	historicalData.push(this.state.history[x].glucose);
-		    }
+                    historicalData.push(this.state.history[x].glucose);
                     comptime = utcTime;
                 } else {
-                    while (utcTime > (comptime + 5.5*60*1000)) {
-                        this.formatTime(ticks, comptime, function(ft) {
+                    while (utcTime > (comptime + 5.5 * 60 * 1000)) {
+                        this.formatTime(ticks, comptime, function (ft) {
                             labels.push(ft);
                         });
                         ticks++;
                         historicalData.push(null);
-                        comptime += 5*60*1000;
+                        comptime += 5 * 60 * 1000;
                     }
                     comptime = utcTime;
-                    this.formatTime(ticks, utcTime, function(ft) {
+                    this.formatTime(ticks, utcTime, function (ft) {
                         labels.push(ft);
                     });
-		    if (this.state.history[x]) {	
-                    	historicalData.push(this.state.history[x].glucose);
-		    }	
+                    historicalData.push(this.state.history[x].glucose);
                 }
+            }
+            var h = 250;
+            var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            if (w > 768) {
+                h = 100;
             }
             var data = {
                 labels: labels,
@@ -148,7 +143,7 @@ export default class GlucoseChart extends Component {
                     ]
                 }
             };
-            history = <div><Line data={data} options={options} /></div>
+            history = <div><Line data={data} options={options} height={h}/></div>
         }
         return (
             <div>{history}</div>

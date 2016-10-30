@@ -92,15 +92,20 @@ class Main extends React.Component {
 
         return (
             <div className="offset-top">
-                <div className="col-sm-12">
+                <div className="col-12">
                     {noData}
-                        <div className="panel-body">
-                            <div className="text-left col-sm-12">Current Reading: {glucose}</div>
-                            <div className="text-left col-sm-12">Direction: {currentTrend}</div>
-                            <div className="text-left col-sm-12">Last Reading: {lastReading}</div>
-                            <div className="text-left col-sm-12"><NextReading status={this.state.status} lastEntry={this.state.lastEntry}/></div>
-                            <GlucoseChart history={this.state.history} />
+                    <div className="panel-body">
+                        <div className="row">
+                            <div className="text-center col-sm-12">Current Reading: {glucose} &nbsp;
+                                Direction: {currentTrend}</div>
                         </div>
+                        <div className="row">
+                            <div className="text-center col-sm-12">Last Reading: {lastReading}
+                                <NextReading status={this.state.status} lastEntry={this.state.lastEntry}/>
+                            </div>
+                        </div>
+                    </div>
+                    <GlucoseChart history={this.state.history}/>
                 </div>
                 <div className="offset-bottom">&nbsp;</div>
             </div>
