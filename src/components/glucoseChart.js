@@ -82,7 +82,7 @@ export default class GlucoseChart extends Component {
                     historicalData.push(this.state.history[x].glucose);
                 }
             }
-            var h = 250;
+            var h = 275;
             var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
             if (w > 768) {
                 h = 100;
