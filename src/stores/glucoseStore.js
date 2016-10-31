@@ -47,7 +47,7 @@ class GlucoseStore {
         currState.data = true;
         if (currState.history) {
             var history = currState.history;
-            history = _.sortBy(history, 'time').reverse().map(function(g) {
+            history = _.sortBy(history, 'time').reverse().filter(function(g) {
                 var unixTime = new Date(g.time).getTime();
                 if (unixTime > (Date.now() - (1000 * 60 * 60 * 3))) {
                     return g;
