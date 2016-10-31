@@ -123,7 +123,7 @@ export default class GlucoseChart extends Component {
                 },
                 scales: {
                     yAxes: [{
-                        type: 'logarithmic',
+                        //type: 'logarithmic',
                         ticks: {
                             min: 0,
                             max: 400,
