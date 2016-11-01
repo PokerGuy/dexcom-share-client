@@ -55,8 +55,7 @@ class Main extends React.Component {
         }
         var currentTrend = 'Not available';
         if (this.state.trend) {
-            var currentT = trend.trendsToText(this.state.trend);
-			currentTrend = <div dangerouslySetInnerHTML={{ __html: {currentT}}}></div>;
+            currentTrend = trend.trendsToText(this.state.trend);
         }
         var lastReading = 'Not Available';
         if (this.state.lastEntry) {
@@ -98,7 +97,7 @@ class Main extends React.Component {
                     <div className="panel-body">
                         <div className="row">
                             <div className="text-center col-sm-12">Current Reading: {glucose} &nbsp;
-                                Direction: {currentTrend}</div>
+                                <div dangerouslySetInnerHTML={{__html: {currentTrend}}}></div>
                         </div>
                         <div className="row">
                             <div className="text-center col-sm-12">Last Reading: {lastReading}
