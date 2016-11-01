@@ -98,6 +98,7 @@ class Main extends React.Component {
                         <div className="row">
                             <div className="text-center col-sm-12">Current Reading: {glucose} &nbsp;
                                 <div dangerouslySetInnerHTML={{__html: {currentTrend}}}></div>
+							</div>	
                         </div>
                         <div className="row">
                             <div className="text-center col-sm-12">Last Reading: {lastReading}
