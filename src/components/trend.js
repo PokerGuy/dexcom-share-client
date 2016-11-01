@@ -7,11 +7,11 @@ exports.trendsToText = function(number) {
         case 2:
             return '<i class="fa fa-arrow-up"/>';
         case 3:
-            return '<i class="fa fa-arrow-up fa-rotate-315"/>';
+            return '<i class="fa fa-arrow-up fa-rotate-45-right"/>';
         case 4:
             return '<i class="fa fa-arrow-right"/>';
         case 5:
-            return '<i class="fa fa-arrow-up fa-rotate-45"/>';
+            return '<i class="fa fa-arrow-down fa-rotate-45-left"/>';
         case 6:
             return '<i class="fa fa-arrow-down"/>';
         case 7:
