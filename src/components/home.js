@@ -56,6 +56,7 @@ class Main extends React.Component {
         var currentTrend = 'Not available';
         if (this.state.trend) {
             var currentT = trend.trendsToText(this.state.trend) + '<i className="fa fa-arrow-right fa-rotate-45"/><i className="fa fa-arrow-right fa-rotate-315"/>';
+			console.log(currentT);
 			currentTrend = <div dangerouslySetInnerHTML={{ __html: currentT}}></div>;
         }
         var lastReading = 'Not Available';
@@ -98,7 +99,7 @@ class Main extends React.Component {
                     <div className="panel-body">
                         <div className="row">
                             <div className="text-center col-sm-12">Current Reading: {glucose} &nbsp;
-                                Direction: {currentTrend}</div>
+                                Direction: {currentTrend}<i className="fa fa-arrow-right fa-rotate-45"/><i className="fa fa-arrow-right fa-rotate-315"/></div>
                         </div>
                         <div className="row">
                             <div className="text-center col-sm-12">Last Reading: {lastReading}
