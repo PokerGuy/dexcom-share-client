@@ -3,19 +3,19 @@ exports.trendsToText = function(number) {
         case 0:
             return "None";
         case 1:
-            return "Double Up";
+            return '<i className="fa fa-arrow-up"/><i className="fa fa-arrow-up"/>';
         case 2:
-            return "Single Up";
+            return '<i className="fa fa-arrow-up"/>';
         case 3:
-            return "Forty Five Degrees Up";
+            return '<i className="fa fa-arrow-up fa-rotate-315"/>';
         case 4:
-            return "Flat";
+            return '<i className="fa fa-arrow-right"/>';
         case 5:
-            return "Forty Five Degrees Down";
+            return '<i className="fa fa-arrow-up fa-rotate-45"/>';
         case 6:
-            return "Single Down";
+            return '<i className="fa fa-arrow-down"/>';
         case 7:
-            return "Oh Shit! Double Down";
+            return '<i className="fa fa-arrow-down"/><i className="fa fa-arrow-down"/>';
         case 8:
             return "Cannot compute";
         case 9:
