@@ -89,7 +89,7 @@ class Main extends React.Component {
         if (this.state.data != true) {
             noData = <div className="alert alert-danger">Not getting any data from Dexcom</div>;
         }
-		var displayReading = '<div class="text-center col-sm-12">Current Reading: ' + glucose + '&nbsp;' + currentTrend + '</div>';	
+        var displayReading = '<div class="text-center col-sm-12">Current Reading: ' + glucose + '&nbsp;' + currentTrend + '</div>';
 
         return (
             <div className="offset-top">
@@ -97,7 +97,7 @@ class Main extends React.Component {
                     {noData}
                     <div className="panel-body">
                         <div className="row">
-                            <div dangerouslySetInnerHTML={{__html: displayReading}} />
+                            <div dangerouslySetInnerHTML={{__html: displayReading}}/>
                         </div>
                         <div className="row">
                             <div className="text-center col-sm-12">Last Reading: {lastReading}

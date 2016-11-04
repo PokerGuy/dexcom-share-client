@@ -8,12 +8,12 @@ exports.trendsToText = function(number) {
             return '<i class="fa fa-arrow-up"/>';
         case 3:
 			//forty five up
-            return '<i class="fa fa-arrow-right fa-rotate-45-left"/>';
+            return '<i class="fa fa-arrow-right fa-rotate-45-up"/>';
         case 4:
             return '<i class="fa fa-arrow-right"/>';
         case 5:
 			//45 down
-            return '<i class="fa fa-arrow-right fa-rotate-45-right"/>';
+            return '<i class="fa fa-arrow-right fa-rotate-45-down"/>';
         case 6:
             return '<i class="fa fa-arrow-down"/>';
         case 7:
