@@ -3,7 +3,7 @@ exports.trendsToText = function(number) {
         case 0:
             return "None";
         case 1:
-            return '<i class="fa fa-arrow-up fa-2x"/><i class="fa fa-arrow-up fa-2x"/>';
+            return '<i class="fa fa-arrow-up fa-2x"/><i class="fa fa-arrow-up"/>';
         case 2:
             return '<i class="fa fa-arrow-up fa-2x"/>';
         case 3:
@@ -17,7 +17,7 @@ exports.trendsToText = function(number) {
         case 6:
             return '<i class="fa fa-arrow-down fa-2x"/>';
         case 7:
-            return '<i class="fa fa-arrow-down fa-2x"/><i class="fa fa-arrow-down fa-2x"/>';
+            return '<i class="fa fa-arrow-down fa-2x"/><i class="fa fa-arrow-down"/>';
         case 8:
             return "Cannot compute";
         case 9:
