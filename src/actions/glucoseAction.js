@@ -22,7 +22,7 @@ class GlucoseActions {
     initialized(res) {
         res.status = 'CONNECTED';
         var history = res.glucose;
-        if (history) {
+        if (history.length > 0) {
             history = _.sortBy(history, 'time').reverse().filter(function(g) {
                 var unixTime = new Date(g.time).getTime();
                 if (unixTime > (Date.now() - (1000 * 60 * 60 * 3))) {
@@ -31,6 +31,8 @@ class GlucoseActions {
             });
             res.glucose = history[0].glucose;
             res.history = history;
+        } else {
+            res.glucose = null;
         }
         this.dispatch(res);
         //console.log(new Date(res.lastEntry).getTime());

@@ -45,6 +45,18 @@ class adminAction {
     unsuccessfulLogin() {
         this.dispatch();
     }
+
+    newVacation(obj){
+        this.dispatch(obj);
+    }
+
+    deleteVacation(obj) {
+        this.dispatch(obj);
+    }
+
+    selectFollower(obj) {
+        this.dispatch(obj);
+    }
 }
 
 export default alt.createActions(adminAction);

@@ -34,29 +34,30 @@ class Header extends React.Component {
     }
 
     render() {
-        var login = <li><Link to="/login">Log In</Link></li>;
+        var login = <li><Link to="login">Log In</Link></li>;
+        var adminActions = <li>&nbsp;</li>;
         if (this.state.token) {
+            adminActions = <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Tasks <span className="caret"></span></a>
+                <ul className="dropdown-menu">
+                    <li><Link to="vacation">Vacation Schedule</Link></li>
+                    <li><Link to="followers">Maintain Followers</Link></li>
+
+                </ul>
+            </li>;
             login = <li><a href="#" onClick={this.logOut}>Log Out</a></li>;
         }
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
                     <div className="navbar-header page-scroll">
-                        <button type="button" className="navbar-toggle" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1">
-                            <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
-                        <Link to="/" className="navbar-brand">Dexcom Messaging System</Link>
+                        <Link to="/" className="navbar-brand">Glucose Trendinator</Link>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav navbar-right">
+                            {adminActions}
                             {login}
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
+                            <li><Link to="about">About</Link></li>;
                         </ul>
                     </div>
                 </div>

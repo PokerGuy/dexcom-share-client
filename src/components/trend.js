@@ -22,6 +22,8 @@ exports.trendsToText = function(number) {
             return "Cannot compute";
         case 9:
             return "Rate out of Range";
+        case 15:
+            return "Connection between this server and Dexcom not established.";
     }
     return "Well, I am flumoxxed";
 };
