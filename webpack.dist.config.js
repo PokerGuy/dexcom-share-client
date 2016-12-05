@@ -77,5 +77,6 @@ module.exports = {
         }, {
             include: /\.json$/,
             loader: 'json-loader'}]
+
     }
 };

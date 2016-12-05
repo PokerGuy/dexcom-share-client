@@ -13,8 +13,11 @@ class AdminStore {
             loggedOut: adminAction.loggedOut,
             unsuccessfulLogin: adminAction.unsuccessfulLogin,
             newVacation: adminAction.newVacation,
+            newFollower: adminAction.newFollower,
             deleteVacation: adminAction.deleteVacation,
-            selectFollower: adminAction.selectFollower
+            deleteFollower: adminAction.deleteFollower,
+            selectFollower: adminAction.selectFollower,
+            hideFollower: adminAction.hideFollower
         });
     }
 
@@ -62,6 +65,15 @@ class AdminStore {
         this.setState(currState);
     }
 
+    newFollower(obj) {
+        var msg = $.notify('Follower added.');
+        var currState = this.state;
+        var followers = currState.followers;
+        followers.push(obj);
+        currState.followers = followers;
+        this.setState(currState);
+    }
+
     deleteVacation(obj) {
         var msg = $.notify('Vacation deleted.');
         var currState = this.state;
@@ -75,9 +87,30 @@ class AdminStore {
         this.setState(currState);
     }
 
+    deleteFollower(obj) {
+        var msg = $.notify('Follower deleted.');
+        var currState = this.state;
+        var followers = currState.followers;
+        followers = _.filter(followers, function(f) {
+            if (f._id != obj.id) {
+                return f;
+            }
+        });
+        currState.followers = followers;
+        this.setState(currState);
+    }
+
     selectFollower(obj) {
         var currState = this.state;
         currState.selectedFollower = obj;
+        this.setState(currState);
+    }
+
+    hideFollower() {
+        var currState = this.state;
+        if ('selectedFollower' in this.state) {
+            delete currState.selectedFollower;
+        }
         this.setState(currState);
     }
 
@@ -89,11 +122,23 @@ class AdminStore {
             var j = JSON.parse(e.data);
             adminAction.newVacation(j);
         }, false);
+        source.addEventListener('newfollower', function (e) {
+            console.log('Got an update for a new follower');
+            console.log(e);
+            var j = JSON.parse(e.data);
+            adminAction.newFollower(j);
+        }, false);
         source.addEventListener('deletevacation', function (e) {
             console.log('Got an update to delete a vacation');
             console.log(e);
             var j = JSON.parse(e.data);
             adminAction.deleteVacation(j);
+        }, false);
+        source.addEventListener('deletefollower', function (e) {
+            console.log('Got an update to delete a follower');
+            console.log(e);
+            var j = JSON.parse(e.data);
+            adminAction.deleteFollower(j);
         }, false);
         source.addEventListener('open', function (e) {
             console.log('secure connection established');

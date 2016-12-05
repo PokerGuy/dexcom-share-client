@@ -1,13 +1,10 @@
 import React                    from 'react';
 import {RouteHandler, Link, browserHistory} from 'react-router';
 import adminStore from '../stores/adminStore';
-import 'styles/bootstrap.css';
-import 'styles/clean-blog.css';
 import adminAction from '../actions/adminAction';
 import _ from 'lodash';
 import moment from 'moment-timezone';
 import { BootstrapPager, GriddleBootstrap } from 'griddle-react-bootstrap';
-import CleanBlogJS from 'lib/clean-blog';
 import request from 'superagent';
 import '../../node_modules/griddle-react-bootstrap/dist/griddle-react-bootstrap.css'
 import constants from '../constants/constants';
@@ -28,7 +25,6 @@ class Main extends React.Component {
     }
 
     onChange(event) {
-        console.log('Change!!!');
         this.setState(event);
     }
 

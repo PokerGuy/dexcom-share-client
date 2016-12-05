@@ -1,10 +1,7 @@
 import React                    from 'react';
 import {RouteHandler, Link, browserHistory} from 'react-router';
 import adminStore from '../stores/adminStore';
-import 'styles/bootstrap.css';
-import 'styles/clean-blog.css';
 import adminAction from '../actions/adminAction';
-import CleanBlogJS from 'lib/clean-blog';
 import trend from './trend';
 
 class Main extends React.Component {

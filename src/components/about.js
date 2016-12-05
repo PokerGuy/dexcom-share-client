@@ -1,8 +1,5 @@
 import React                    from 'react';
 import {RouteHandler, Link} from 'react-router';
-import 'styles/bootstrap.css';
-import 'styles/clean-blog.css';
-import CleanBlogJS from 'lib/clean-blog';
 import trend from './trend';
 
 class Main extends React.Component {

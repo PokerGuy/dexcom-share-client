@@ -1,13 +1,10 @@
 import React                    from 'react';
 import {RouteHandler, Link, browserHistory} from 'react-router';
 import adminStore from '../stores/adminStore';
-import 'styles/bootstrap.css';
-import 'styles/clean-blog.css';
 import adminAction from '../actions/adminAction';
 import _ from 'lodash';
 import moment from 'moment-timezone';
-import { BootstrapPager, GriddleBootstrap } from 'griddle-react-bootstrap';
-import CleanBlogJS from 'lib/clean-blog';
+import {BootstrapPager, GriddleBootstrap} from 'griddle-react-bootstrap';
 import request from 'superagent';
 import '../../node_modules/griddle-react-bootstrap/dist/griddle-react-bootstrap.css'
 import constants from '../constants/constants';
@@ -38,6 +35,10 @@ class Main extends React.Component {
             var phone = "(" + p.substring(0, 3) + ") " + p.substring(3, 6) + "-" + p.substring(6, 10);
             return ({"Name": f._id, "Phone Number": phone, "Expiration Date": e, "Delete": f._id});
         });
+        var timeBand = <div></div>;
+        if ('selectedFollower' in adminStore.getState()) {
+            timeBand = <Timeband followerId={this.state.selectedFollower}/>;
+        }
         var columnMeta = [
             {
                 "columnName": "Name",
@@ -70,7 +71,7 @@ class Main extends React.Component {
             <div className="offset-top">
                 <div className="col-sm-12">
                     <div className="row">
-                        <Link to="addvacation">
+                        <Link to="addfollower">
                             <button className="btn btn-primary">Add a Follower</button>
                         </Link>
                     </div>
@@ -89,7 +90,7 @@ class Main extends React.Component {
                             customPagerComponent={ BootstrapPager }
                         />
                     </div>
-                    <Timeband followerId={this.state.selectedFollower}/>
+                    {timeBand}
                 </div>
                 <div className="offset-bottom">&nbsp;</div>
             </div>
@@ -132,7 +133,7 @@ class DeleteButton extends React.Component {
     click() {
         var token = adminStore.getState().token;
         request
-            .del(constants.apiroot + 'vacation/' + this.props.data)
+            .del(constants.apiroot + 'follower/' + this.props.data)
             .set('Authorization', 'Bearer ' + token)
             .end(function (err, res) {
                 if (res.status === 200) {
@@ -155,6 +156,12 @@ class DeleteButton extends React.Component {
 class Timeband extends React.Component {
     constructor(props) {
         super(props);
+        this.hide = this.hide.bind(this);
+    }
+
+    hide(e) {
+        e.preventDefault();
+        adminAction.hideFollower();
     }
 
     render() {
@@ -182,7 +189,7 @@ class Timeband extends React.Component {
             return (
                 <div>
                     <div className="row">
-                        Time Bands for {name.name}:
+                        Time Bands for {name.name} <a href="#" onClick={this.hide}>(HIDE)</a>
                     </div>
                     <div className="row">
                         <table className="table table-bordered table-striped table-hover">
@@ -190,16 +197,28 @@ class Timeband extends React.Component {
                             <tr>
                                 <th>Start Time</th>
                                 <th>End Time</th>
-                                <th>&nbsp;</th>
+                                <th>Events</th>
                             </tr>
                             </thead>
                             <tbody>
                             {name.timeBand.map(function (tb) {
                                 return (
-                                    <tr>
+                                    <tr key={tb._id}>
                                         <td>{formatting(tb.startHour, tb.startMinute)}</td>
                                         <td>{formatting(tb.endHour, tb.endMinute)}</td>
-                                        <td>Placeholder</td>
+                                        <td>
+                                            <ul>
+                                                {tb.event.map(function (e) {
+                                                    return (
+                                                        <li key={e._id}>
+                                                            Event Type: {e.type}<br/>
+                                                            Glucose Level: {e.glucose}<br/>
+                                                            Action: {e.action}<br/>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </td>
                                     </tr>
                                 )
                             })}

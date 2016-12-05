@@ -50,12 +50,25 @@ class adminAction {
         this.dispatch(obj);
     }
 
+    newFollower(obj){
+        this.dispatch(obj);
+    }
+
     deleteVacation(obj) {
+        this.dispatch(obj);
+    }
+
+    deleteFollower(obj) {
         this.dispatch(obj);
     }
 
     selectFollower(obj) {
         this.dispatch(obj);
+    }
+
+    hideFollower() {
+        console.log('action called');
+        this.dispatch();
     }
 }
 

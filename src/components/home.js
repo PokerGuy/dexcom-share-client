@@ -1,8 +1,5 @@
 import React                    from 'react';
 import {RouteHandler, Link} from 'react-router';
-import 'styles/bootstrap.css';
-import 'styles/clean-blog.css';
-import CleanBlogJS from 'lib/clean-blog';
 import glucoseActions from '../actions/glucoseAction';
 import glucoseStore from '../stores/glucoseStore';
 import trend from './trend';

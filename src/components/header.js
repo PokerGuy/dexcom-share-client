@@ -2,10 +2,6 @@ import React                    from 'react';
 import {RouteHandler, Link} from 'react-router';
 import adminAction from '../actions/adminAction';
 import adminStore from '../stores/adminStore';
-import '../styles/bootstrap.css';
-import '../styles/clean-blog.css';
-import Bootstrap from '../lib/bootstrap';
-import CleanBlogJS from '../lib/clean-blog';
 
 class Header extends React.Component {
 
