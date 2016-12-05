@@ -50,7 +50,8 @@ module.exports = {
             'components': __dirname + '/src/components/',
             'stores': __dirname + '/src/stores',
             'actions': __dirname + '/src/actions',
-            'lib': __dirname + '/src/lib'
+            'lib': __dirname + '/src/lib',
+            'fonts': __dirname + '/src/fonts'
         }
     },
 
@@ -72,8 +73,8 @@ module.exports = {
             test: /\.less/,
             loader: 'style-loader!css-loader!less-loader'
         }, {
-            test: /\.(png|jpg|eot|ttf|svg|woff|woff2)$/,
-            loader: 'url-loader?limit=8192'
+            test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/
+            , loader: 'file-loader'
         }, {
             include: /\.json$/,
             loader: 'json-loader'}]
