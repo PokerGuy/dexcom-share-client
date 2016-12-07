@@ -56,7 +56,6 @@ class Main extends React.Component {
                     currState.errors = ['You are not logged in.'];
                     self.setState(currState);
                 } else if (res.body.errors) {
-                    console.log(res.body);
                     var currState = self.state;
                     currState.errors = res.body.errors;
                     self.setState(currState);
@@ -68,7 +67,6 @@ class Main extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         var errors = <div></div>;
         if (this.state.errors.length > 0) {
             errors = <div className="alert alert-danger">

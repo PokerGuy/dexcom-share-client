@@ -181,17 +181,13 @@ class FollowerStore {
     removeEvent(eventId) {
         var currState = this.state;
         var tb = _.map(currState.timeBand, function (t) {
-            if (t.id != currState.selectedTimeBand) {
-                return t;
-            } else {
-                var e = _.filter(t.event, function (event) {
-                    if (event.id != eventId) {
-                        return event;
-                    }
-                });
-                t.event = e;
-                return t;
-            }
+            var e = _.filter(t.event, function (event) {
+                if (event.id != eventId) {
+                    return event;
+                }
+            });
+            t.event = e;
+            return t;
         });
         currState.timeBand = tb;
         this.setState(currState);
@@ -209,32 +205,18 @@ class FollowerStore {
 
     eventChange(obj) {
         //this.dispatch({eventId: eventId, name: name, value: value});
-        console.log('follower store from eventChange action');
-        console.log(this.state);
-        console.log(obj);
         var currState = this.state;
-        var timebands = currState.timeBand;
-        timebands = _.filter(timebands, function (t) {
-            if (t.id == currState.selectedTimeBand) {
-                return t;
-            }
-        });
-        var events = _.map(timebands[0].event, function (e) {
-            if (e.id != obj.eventId) {
-                return e;
-            } else {
-                var modE = e;
-                modE[obj.name] = obj.value;
-                return modE;
-            }
-        });
-        timebands[0].event = events;
-        currState.timeBand = _.map(currState.timeBand, function (t) {
-            if (t.id != currState.selectedTimeBand) {
-                return t;
-            } else {
-                return timebands[0];
-            }
+        currState.timeBand = _.map(currState.timeBand, function(t) {
+            t.event = _.map(t.event, function(evt) {
+                if (evt.id != obj.eventId) {
+                    return evt;
+                } else {
+                    var newE = evt;
+                    newE[obj.name] = obj.value;
+                    return newE;
+                }
+            });
+            return t;
         });
         console.log(currState);
         this.setState(currState);

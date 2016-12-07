@@ -130,7 +130,8 @@ class DeleteButton extends React.Component {
         this.click = this.click.bind(this);
     }
 
-    click() {
+    click(e) {
+        e.preventDefault();
         var token = adminStore.getState().token;
         request
             .del(constants.apiroot + 'follower/' + this.props.data)
@@ -147,7 +148,7 @@ class DeleteButton extends React.Component {
     render() {
         return (
             <div className="text-center">
-                <button className="btn btn-danger" onClick={this.click}>Delete</button>
+                <a href="#" onClick={this.click}>Delete</a>
             </div>
         )
     }

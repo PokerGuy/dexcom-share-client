@@ -35,7 +35,7 @@ class Header extends React.Component {
         if (this.state.token) {
             adminTasks = <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Admin Tasks <span className="caret"></span></a>
+                   aria-expanded="false">Admin Tasks <span className="fa fa-caret-down"></span></a>
                 <ul className="dropdown-menu">
                     <li><Link to="vacation">Vacation Schedule</Link></li>
                     <li><Link to="followers">Maintain Followers</Link></li>

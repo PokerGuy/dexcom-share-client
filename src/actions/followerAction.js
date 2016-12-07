@@ -64,7 +64,6 @@ class followerAction {
     }
 
     timeBandSelected(id) {
-        console.log('action check');
         this.dispatch(id);
     }
 
