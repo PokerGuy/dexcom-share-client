@@ -33,7 +33,7 @@ class Main extends React.Component {
             var e = moment.tz(f.expirationDate, 'America/Chicago').format('MM/DD/YYYY');
             var p = f.phoneNumber.toString();
             var phone = "(" + p.substring(0, 3) + ") " + p.substring(3, 6) + "-" + p.substring(6, 10);
-            return ({"Name": f._id, "Phone Number": phone, "Expiration Date": e, "Delete": f._id});
+            return ({"Name": f.name, "Details": f._id, "Phone Number": phone, "Expiration Date": e, "Delete": f._id});
         });
         var timeBand = <div></div>;
         if ('selectedFollower' in adminStore.getState()) {
@@ -44,24 +44,30 @@ class Main extends React.Component {
                 "columnName": "Name",
                 "order": 1,
                 "locked": false,
+                "visible": true
+            },
+            {
+                "columnName": "Details",
+                "order": 2,
+                "locked": false,
                 "visible": true,
                 "customComponent": FollowerSelect
             },
             {
                 "columnName": "Phone Number",
-                "order": 2,
-                "locked": false,
-                "visible": true
-            },
-            {
-                "columnName": "Expiration Date",
                 "order": 3,
                 "locked": false,
                 "visible": true
             },
             {
-                "columnName": "Delete",
+                "columnName": "Expiration Date",
                 "order": 4,
+                "locked": false,
+                "visible": true
+            },
+            {
+                "columnName": "Delete",
+                "order": 5,
                 "locked": false,
                 "visible": true,
                 "customComponent": DeleteButton
@@ -114,10 +120,7 @@ class FollowerSelect extends React.Component {
         return (
             <div>
                 <div className="text-left">
-                    {name.name}
-                </div>
-                <div className="text-right">
-                    <a href="#" onClick={this.click}>(See Details)</a>
+                    <a href="#" onClick={this.click}>See Details</a>
                 </div>
             </div>
         )
