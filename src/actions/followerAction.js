@@ -78,6 +78,10 @@ class followerAction {
     eventChange(eventId, name, value) {
         this.dispatch({eventId: eventId, name: name, value: value});
     }
+
+    init() {
+        this.dispatch();
+    }
 }
 
 export default alt.createActions(followerAction);

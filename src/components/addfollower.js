@@ -27,6 +27,7 @@ class Main extends React.Component {
 
     onChange(event) {
         if ('complete' in event) {
+            followerAction.init();
             this.props.history.push('/followers')
         } else {
             this.setState(event);
@@ -34,9 +35,9 @@ class Main extends React.Component {
     }
 
     render() {
-        if ('complete' in this.state) {
+        /* if ('complete' in this.state) {
             this.props.history.push('/followers')
-        }
+        } */
         var timeBand = <div></div>;
         var errors = <div></div>;
         if (this.state.errors != null) {

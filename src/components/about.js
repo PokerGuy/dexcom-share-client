@@ -10,12 +10,13 @@ class Main extends React.Component {
                 <div className="col-sm-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">
-                            <h3 className="panel-title">Working demo from the Austin Tech Blogger</h3>
+                            <h3 className="panel-title">DISCLAIMERr</h3>
                         </div>
                         <div className="panel-body">
                             <div className="text-left col-sm-12">
-                                This is a working demo coming from the blog and code samples at <a href="http://austintechblogger.blogspot.com">The Austin
-                            Tech Blogger</a>. This is for demonstration and teaching purposes only.
+                                All information, thought, and code described here is intended for informational and educational purposes only.
+                                I currently make no attempt at HIPAA privacy compliance. Use of this code is without warranty or support of any kind.
+                                Use at your own risk, and do not use the information or code to make medical decisions.
                             </div>
                         </div>
                     </div>

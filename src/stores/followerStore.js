@@ -24,7 +24,8 @@ class FollowerStore {
             removeEvent: followerAction.removeEvent,
             toggle: followerAction.toggle,
             eventChange: followerAction.eventChange,
-            setName: followerAction.setName
+            setName: followerAction.setName,
+            init: followerAction.init
         });
         this.state = {phone: "", includeWeekends: true, timeBand: [{id: uuid.v4(), event: [{id: uuid.v4()}]}]};
     }
@@ -64,9 +65,9 @@ class FollowerStore {
         }
         _.each(this.state.timeBand, function (tb) {
             var fixTime = function (hour, ampm) {
-                if (hour === 12 && ampm === "AM") {
+                if (hour == 12 && ampm === "AM") {
                     return 0;
-                } else if (ampm === "PM") {
+                } else if (ampm === "PM" && hour != 12) {
                     return parseInt(hour) + 12;
                 } else {
                     return parseInt(hour);
@@ -226,6 +227,10 @@ class FollowerStore {
         var currState = this.state;
         currState.name = name;
         this.setState(currState);
+    }
+
+    init() {
+        this.setState({phone: "", includeWeekends: true, timeBand: [{id: uuid.v4(), event: [{id: uuid.v4()}]}]});
     }
 }
 
