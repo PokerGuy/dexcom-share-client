@@ -218,6 +218,7 @@ class Timeband extends React.Component {
                                                             Event Type: {e.type}<br/>
                                                             Glucose Level: {e.glucose}<br/>
                                                             Action: {e.action}<br/>
+                                                            Repeat: {e.repeat/60/1000 + ' minutes'}
                                                         </li>
                                                     )
                                                 })}
