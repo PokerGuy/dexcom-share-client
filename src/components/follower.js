@@ -30,7 +30,13 @@ class Main extends React.Component {
 
     render() {
         var formatted = _.map(this.state.followers, function (f) {
-            var e = moment.tz(f.expirationDate, 'America/Chicago').format('MM/DD/YYYY');
+            var tz;
+            if (localStorage.tz == undefined) {
+                tz = 'America/Chicago';
+            } else {
+                tz = localStorage.tz;
+            }
+            var e = moment.tz(f.expirationDate, tz).format('MM/DD/YYYY');
             var p = f.phoneNumber.toString();
             var phone = "(" + p.substring(0, 3) + ") " + p.substring(3, 6) + "-" + p.substring(6, 10);
             return ({"Name": f.name, "Details": f._id, "Phone Number": phone, "Expiration Date": e, "Delete": f._id});

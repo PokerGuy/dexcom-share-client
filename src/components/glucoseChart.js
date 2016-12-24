@@ -20,7 +20,13 @@ export default class GlucoseChart extends Component {
     formatTime(ticks, t, cb) {
         if (ticks % 6 == 0) {
             var AMPM = 'AM';
-            var m = moment.tz(t, 'America/Chicago').format('HH:mm');
+            var tz;
+            if (localStorage.tz == undefined) {
+                tz = 'America/Chicago';
+            } else {
+                tz = localStorage.tz;
+            }
+            var m = moment.tz(t, tz).format('HH:mm');
             var s = m.split(':');
             var h;
             var mins;

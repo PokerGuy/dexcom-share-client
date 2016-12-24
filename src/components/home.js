@@ -5,6 +5,7 @@ import glucoseStore from '../stores/glucoseStore';
 import trend from './trend';
 import _ from 'lodash';
 import moment from 'moment-timezone';
+import m from 'moment';
 import GlucoseChart from './glucoseChart';
 import NextReading from './timer';
 
@@ -56,28 +57,36 @@ class Main extends React.Component {
         }
         var lastReading = 'Not Available';
         if (this.state.lastEntry) {
+            var tz;
+            if (localStorage.tz == undefined) {
+                tz = 'America/Chicago';
+            } else {
+                tz = localStorage.tz;
+            }
             var last = new Date(this.state.lastEntry);
+            last = moment(last);
+            last.tz(tz);
             var ampm = 'AM';
-            if (last.getHours() == 0) {
+            if (last.get('hours') == 0) {
                 lastReading = '12:';
-            } else if (last.getHours() == 12) {
+            } else if (last.get('hours') == 12) {
                 lastReading = '12:';
                 ampm = 'PM'
-            } else if (last.getHours() > 12) {
+            } else if (last.get('hours') > 12) {
                 lastReading = last.getHours() - 12 + ':';
                 ampm = 'PM';
             } else {
-                lastReading = last.getHours() + ':';
+                lastReading = last.get('hours') + ':';
             }
-            if (last.getMinutes() < 10) {
-                lastReading += '0' + last.getMinutes();
+            if (last.get('minutes') < 10) {
+                lastReading += '0' + last.get('minutes');
             } else {
-                lastReading += last.getMinutes();
+                lastReading += last.get('minutes');
             }
-            if (last.getSeconds() < 10) {
-                lastReading += ':0' + last.getSeconds();
+            if (last.get('seconds') < 10) {
+                lastReading += ':0' + last.get('seconds');
             } else {
-                lastReading += ':' + last.getSeconds();
+                lastReading += ':' + last.get('seconds');
             }
             lastReading += ' ' + ampm;
         }

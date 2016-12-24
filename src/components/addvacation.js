@@ -45,11 +45,17 @@ class Main extends React.Component {
         e.preventDefault();
         var token = adminStore.getState().token;
         var self = this;
+        var tz;
+        if (localStorage.tz == undefined) {
+            tz = 'America/Chicago';
+        } else {
+            tz = localStorage.tz;
+        }
         request
             .post(constants.apiroot + 'vacation')
             .set('Authorization', 'Bearer ' + token)
             .set('Content-type', 'application/json')
-            .send({startDate: moment.tz(this.state.start, 'America/Chicago').format('MM/DD/YYYY'), endDate: moment.tz(this.state.end, 'America/Chicago').format('MM/DD/YYYY'), name: this.state.name})
+            .send({startDate: moment.tz(this.state.start, tz).format('MM/DD/YYYY'), endDate: moment.tz(this.state.end, tz).format('MM/DD/YYYY'), name: this.state.name})
             .end(function (err, res) {
                 if (res.status == 401) {
                     var currState = self.state;

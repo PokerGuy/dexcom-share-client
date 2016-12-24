@@ -29,9 +29,15 @@ class Main extends React.Component {
     }
 
     render() {
+        var tz;
+        if (localStorage.tz == undefined) {
+            tz = 'America/Chicago';
+        } else {
+            tz = localStorage.tz;
+        }
         var formatted = _.map(this.state.vacation, function (v) {
-            var s = moment.tz(v.startDate, 'America/Chicago').format('MM/DD/YYYY');
-            var e = moment.tz(v.endDate, 'America/Chicago').format('MM/DD/YYYY');
+            var s = moment.tz(v.startDate, tz).format('MM/DD/YYYY');
+            var e = moment.tz(v.endDate, tz).format('MM/DD/YYYY');
             return ({"Name": v.name, "Start Date": s, "End Date": e, "Delete": v._id});
         });
         var columnMeta = [

@@ -61,7 +61,13 @@ class FollowerStore {
             timeBand: []
         };
         if ('expirationDate' in this.state) {
-            follower.expirationDate = moment.tz(this.state.expirationDate, 'America/Chicago').format('MM/DD/YYYY')
+            var tz;
+            if (localStorage.tz == undefined) {
+                tz = 'America/Chicago';
+            } else {
+                tz = localStorage.tz;
+            }
+            follower.expirationDate = moment.tz(this.state.expirationDate, tz).format('MM/DD/YYYY')
         }
         _.each(this.state.timeBand, function (tb) {
             var fixTime = function (hour, ampm) {

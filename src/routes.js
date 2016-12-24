@@ -8,6 +8,7 @@ import Vacation from 'components/vacation';
 import AddVacation from 'components/addvacation';
 import Followers from 'components/follower';
 import AddFollower from 'components/addfollower';
+import Settings from 'components/settings';
 
 const routes = (
     <Route path="layout" component={Layout}>
@@ -18,6 +19,7 @@ const routes = (
         <Route name="addvacation" path="/addvacation" component={AddVacation} />
         <Route name="followers" path="/followers" component={Followers} />
         <Route name="addfollower" path="/addfollower" component={AddFollower} />
+        <Route name="settings" path="/settings" component={Settings} />
     </Route>
 );
 

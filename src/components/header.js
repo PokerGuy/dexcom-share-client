@@ -61,6 +61,9 @@ class Header extends React.Component {
                             {adminTasks}
                             {login}
                             <li>
+                                <Link to="/settings">Settings</Link>
+                            </li>
+                            <li>
                                 <Link to="/about">About</Link>
                             </li>
                         </ul>
