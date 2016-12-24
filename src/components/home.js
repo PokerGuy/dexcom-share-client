@@ -73,7 +73,7 @@ class Main extends React.Component {
                 lastReading = '12:';
                 ampm = 'PM'
             } else if (last.get('hours') > 12) {
-                lastReading = last.getHours() - 12 + ':';
+                lastReading = last.get('hours') - 12 + ':';
                 ampm = 'PM';
             } else {
                 lastReading = last.get('hours') + ':';
