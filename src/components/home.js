@@ -102,13 +102,17 @@ class Main extends React.Component {
                 <div className="col-12">
                     {noData}
                     <div className="panel-body">
-                        <div className="row">
-                            <div dangerouslySetInnerHTML={{__html: displayReading}}/>
+                        <div className="text-center col-sm-4">
+                            <img src="/images/wild-unicorn-silhouette-57-268264.png"/>
                         </div>
-                        <div className="row">
-                            <div className="text-center col-sm-12">Last Reading: {lastReading}
+                        <div className="text-center col-sm-4">
+                            <div dangerouslySetInnerHTML={{__html: displayReading}}/>
+                            <div>Last Reading: {lastReading}
                                 <NextReading status={this.state.status} lastEntry={this.state.lastEntry}/>
                             </div>
+                        </div>
+                        <div className="text-center col-sm-4">
+                            <img src="/images/wild-unicorn-silhouette-57-268264.png"/>
                         </div>
                     </div>
                     <GlucoseChart history={this.state.history}/>
@@ -120,3 +124,9 @@ class Main extends React.Component {
 }
 
 export default Main;
+
+/*
+ <div className="col-4">
+ <img src="/images/wild-unicorn-silhouette-180-180.png"/>
+ </div>
+ */
