@@ -23,22 +23,50 @@ class Main extends React.Component {
                 filter.push(f);
             }
         });
+        var first = null;
+        var second = null;
+        var third = null;
+        if (localStorage.tz != null) {
+            var split = localStorage.tz.split('/');
+            first = split[0];
+            if (split[1] != undefined) {
+                second = split[1];
+                if (split[2] != undefined) {
+                    third = split[2];
+                }
+            }
+        } else {
+            first = 'America';
+            second = 'Chicago';
+        }
         this.setState({
             firstChoice: filter,
             secondChoice: [],
             thirdChoice: [],
-            first: null,
-            second: null,
-            third: null
+            first: first,
+            second: second,
+            third: third
+        }, function() {
+            if (second != null) {
+                var dummy = {target: {value: first, reset: false}};
+                var self = this;
+                this.first(dummy, function() {
+                    if (third != null) {
+                        dummy = {target: {value: second, reset: false}};
+                        self.second(dummy);
+                    }
+                });
+            }
         });
     }
 
-    first(e) {
-        e.preventDefault();
+    first(e, cb) {
         var copy = this.state;
         copy.first = e.target.value;
-        copy.second = null;
-        copy.third = null;
+        if (e.target.reset != false) {
+            copy.second = null;
+            copy.third = null;
+        }
         var sc = [];
         _.each(moment.tz.names(), function (name) {
             var elem = name.split('/');
@@ -48,14 +76,19 @@ class Main extends React.Component {
         });
         copy.secondChoice = sc;
         copy.thirdChoice = [];
-        this.setState(copy);
+        this.setState(copy, function() {
+            if (cb != undefined) {
+                cb();
+            }
+        });
     }
 
     second(e) {
-        e.preventDefault();
         var copy = this.state;
         copy.second = e.target.value;
-        copy.third = null;
+        if (e.target.reset != false) {
+            copy.third = null;
+        }
         var tc = [];
         _.each(moment.tz.names(), function (name) {
             var elem = name.split('/');
@@ -68,7 +101,6 @@ class Main extends React.Component {
     }
 
     third(e) {
-        e.preventDefault();
         var copy = this.state;
         copy.third = e.target.value;
         this.setState(copy);
@@ -209,7 +241,7 @@ class Main extends React.Component {
                                     {second}
                                     {third}
                                     <button className="btn btn-success" onClick={this.save}>Submit</button>
-                                    <Link to="home">
+                                    <Link to="/">
                                         <button className="btn btn-danger">Cancel</button>
                                     </Link>
                                 </form>
